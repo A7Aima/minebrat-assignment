@@ -17,4 +17,5 @@ export class ListComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.stateSubscribe?.unsubscribe();
   }
+  //             "proxyConfig": "src/proxy.conf.json"
 }

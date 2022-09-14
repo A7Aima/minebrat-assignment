@@ -5,12 +5,12 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class RemoteClientService {
-  url = 'http://api.minebrat.com/api/v1/';
+  url = 'http://api.minebrat.com/api/v1';
 
   constructor(private http: HttpClient) {}
 
   getStatesList() {
-    return this.http.get(this.url + 'states');
+    return this.http.get('/states');
   }
 
   getCitiesList(stateId: number) {

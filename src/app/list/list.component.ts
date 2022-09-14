@@ -39,6 +39,9 @@ export class ListComponent implements OnInit, OnDestroy {
 
   onSelectState() {
     if ((<FormControl>this.stateCityForm.get('state')).value) {
+      console.log(
+        'StateId' + (<FormControl>this.stateCityForm.get('state')).value
+      );
       this.service.onSelectState(
         (<FormControl>this.stateCityForm.get('state')).value
       );

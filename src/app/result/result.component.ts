@@ -13,6 +13,7 @@ export class ResultComponent implements OnInit {
   constructor(private service: AssignmentService) {}
 
   ngOnInit(): void {
+    // console.log('result page' + this.service.selectedStateModel);s
     if (this.service.selectedStateModel && this.service.selectedCityModel) {
       this.stateName = this.service.selectedStateModel.stateName;
       this.cityName = this.service.selectedCityModel.cityName;

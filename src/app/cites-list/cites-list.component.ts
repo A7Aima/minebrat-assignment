@@ -29,9 +29,10 @@ export class CitesListComponent implements OnInit, OnDestroy {
   }
 
   onSelectCity() {
-    if ((<FormControl>this.parentForm.get('state')).value) {
+    if ((<FormControl>this.parentForm.get('city')).value) {
+      console.log((<FormControl>this.parentForm.get('city')).value);
       this.service.onSelectCity(
-        (<FormControl>this.parentForm.get('state')).value
+        (<FormControl>this.parentForm.get('city')).value
       );
     }
   }

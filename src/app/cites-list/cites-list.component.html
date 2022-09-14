@@ -6,7 +6,7 @@
     formControlName="city"
     (click)="onSelectCity()"
   >
-    <option *ngFor="let city of cityList; let i = index" [value]="city">
+    <option *ngFor="let city of cityList; let i = index" [value]="city.cityId">
       {{ city.cityName }}
     </option>
   </select>

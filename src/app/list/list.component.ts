@@ -31,6 +31,8 @@ export class ListComponent implements OnInit, OnDestroy {
   }
 
   onSelectState(index: number) {
+    this.selectedStateModel = undefined;
+    console.log('pressed');
     this.selectedStateModel = this.stateList[index];
   }
 }

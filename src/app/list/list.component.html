@@ -16,6 +16,8 @@
     </div>
   </div>
   <div class="col-md-7">
-    <app-cites-list></app-cites-list>
+    <div *ngIf="selectedStateModel">
+      <app-cites-list [selectState]="selectedStateModel"></app-cites-list>
+    </div>
   </div>
 </div>

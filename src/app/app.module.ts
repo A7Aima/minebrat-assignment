@@ -8,7 +8,6 @@ import { ListComponent } from './list/list.component';
 import { CitesListComponent } from './cites-list/cites-list.component';
 import { ResultComponent } from './result/result.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { StateModel } from './interfaces/state.interface';
 
 @NgModule({
   declarations: [

@@ -19,7 +19,7 @@ export class CitesListComponent implements OnInit, OnDestroy {
   citySubscribe?: Subscription;
 
   ngOnInit(): void {
-    this.service.cityListChange.subscribe((res) => {
+    this.citySubscribe = this.service.cityListChange.subscribe((res) => {
       this.cityList = res;
     });
   }

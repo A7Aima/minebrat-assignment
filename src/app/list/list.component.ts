@@ -16,8 +16,6 @@ export class ListComponent implements OnInit, OnDestroy {
 
   constructor(private service: AssignmentService) {}
   stateListSubscribe?: Subscription;
-  stateSubscribe?: Subscription;
-  submitSubscribe?: Subscription;
 
   stateCityForm = new FormGroup({
     state: new FormControl(null, Validators.required),
@@ -29,14 +27,9 @@ export class ListComponent implements OnInit, OnDestroy {
     this.stateListSubscribe = this.service.stateListChange.subscribe((res) => {
       this.stateList = res;
     });
-    this.stateSubscribe = this.service.selectedStateModel.subscribe((res) => {
-      this.service.getCities(res.stateId);
-    });
   }
   ngOnDestroy(): void {
     this.stateListSubscribe?.unsubscribe();
-    this.stateSubscribe?.unsubscribe();
-    this.submitSubscribe?.unsubscribe();
   }
 
   onSelectState() {
@@ -44,11 +37,13 @@ export class ListComponent implements OnInit, OnDestroy {
       this.service.onSelectState(
         (<FormControl>this.stateCityForm.get('state')).value
       );
+      this.service.getCities(
+        (<FormControl>this.stateCityForm.get('state')).value
+      );
     }
   }
 
   onSubmit() {
     console.log('Submittable');
-    console.log(this.service.selectedCityModel);
   }
 }

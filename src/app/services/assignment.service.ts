@@ -11,11 +11,11 @@ export class AssignmentService {
   constructor(private client: RemoteClientService) {}
 
   stateList: StateModel[] = [];
-  selectedStateModel = new Subject<StateModel>();
+  selectedStateModel!: StateModel;
   stateListChange = new Subject<StateModel[]>();
 
   cityList: CityModel[] = [];
-  selectedCityModel = new Subject<CityModel>();
+  selectedCityModel!: CityModel;
   cityListChange = new Subject<CityModel[]>();
   cityListSub?: Subscription;
   stateListSub?: Subscription;
@@ -38,10 +38,10 @@ export class AssignmentService {
   }
 
   onSelectState(index: number) {
-    this.selectedStateModel.next(this.stateList[index]);
+    this.selectedStateModel = this.stateList[index];
   }
 
   onSelectCity(index: number) {
-    this.selectedCityModel.next(this.cityList[index]);
+    this.selectedCityModel = this.cityList[index];
   }
 }

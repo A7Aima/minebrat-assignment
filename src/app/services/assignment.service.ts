@@ -20,10 +20,7 @@ export class AssignmentService {
   cityListSub?: Subscription;
   stateListSub?: Subscription;
 
-  isNotSubmittable = new Subject<boolean>();
-
   getStates() {
-    this.isNotSubmittable.next(true);
     this.stateListSub = this.client.getStatesList().subscribe((res) => {
       this.stateList = res;
       this.stateListChange.next(this.stateList.slice());
@@ -46,6 +43,5 @@ export class AssignmentService {
 
   onSelectCity(index: number) {
     this.selectedCityModel.next(this.cityList[index]);
-    this.isNotSubmittable.next(false);
   }
 }

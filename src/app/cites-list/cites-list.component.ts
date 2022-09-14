@@ -1,5 +1,5 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { CityModel } from '../interfaces/city.interface';
 import { AssignmentService } from '../services/assignment.service';
@@ -28,7 +28,11 @@ export class CitesListComponent implements OnInit, OnDestroy {
     this.citySubscribe?.unsubscribe();
   }
 
-  onSelectCity(index: number) {
-    this.service.onSelectCity(index);
+  onSelectCity() {
+    if ((<FormControl>this.parentForm.get('state')).value) {
+      this.service.onSelectCity(
+        (<FormControl>this.parentForm.get('state')).value
+      );
+    }
   }
 }

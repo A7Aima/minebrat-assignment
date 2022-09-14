@@ -13,7 +13,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class ListComponent implements OnInit, OnDestroy {
   stateList: StateModel[] = [];
   selectedStateModel?: StateModel;
-  isNotSubmit: boolean = true;
 
   constructor(private service: AssignmentService) {}
   stateListSubscribe?: Subscription;
@@ -33,9 +32,6 @@ export class ListComponent implements OnInit, OnDestroy {
     this.stateSubscribe = this.service.selectedStateModel.subscribe((res) => {
       this.service.getCities(res.stateId);
     });
-    this.submitSubscribe = this.service.isNotSubmittable.subscribe((value) => {
-      this.isNotSubmit = value;
-    });
   }
   ngOnDestroy(): void {
     this.stateListSubscribe?.unsubscribe();
@@ -43,11 +39,16 @@ export class ListComponent implements OnInit, OnDestroy {
     this.submitSubscribe?.unsubscribe();
   }
 
-  onSelectState(index: number) {
-    this.service.onSelectState(index);
+  onSelectState() {
+    if ((<FormControl>this.stateCityForm.get('state')).value) {
+      this.service.onSelectState(
+        (<FormControl>this.stateCityForm.get('state')).value
+      );
+    }
   }
 
   onSubmit() {
     console.log('Submittable');
+    console.log(this.service.selectedCityModel);
   }
 }

@@ -1,6 +1,11 @@
 <form [formGroup]="parentForm">
   <h2>Cities List</h2>
-  <select name="states" id="states" formControlName="city">
+  <select
+    name="states"
+    id="states"
+    formControlName="city"
+    (click)="onSelectCity()"
+  >
     <option *ngFor="let city of cityList; let i = index" [value]="city">
       {{ city.cityName }}
     </option>

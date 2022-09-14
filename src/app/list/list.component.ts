@@ -4,6 +4,7 @@ import { RemoteClientService } from 'src/app/source/remote-client.service';
 import { StateModel } from 'src/app/interfaces/state.interface';
 import { AssignmentService } from '../services/assignment.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-list',
@@ -14,7 +15,11 @@ export class ListComponent implements OnInit, OnDestroy {
   stateList: StateModel[] = [];
   selectedStateModel?: StateModel;
 
-  constructor(private service: AssignmentService) {}
+  constructor(
+    private service: AssignmentService,
+    private route: Router,
+    private activeRoute: ActivatedRoute
+  ) {}
   stateListSubscribe?: Subscription;
 
   stateCityForm = new FormGroup({
@@ -45,5 +50,6 @@ export class ListComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     console.log('Submittable');
+    this.route.navigate(['result']);
   }
 }

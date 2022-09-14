@@ -1,1 +1,5 @@
-<p>result works!</p>
+<h1 *ngIf="isVerified">"You Have selected {{ cityName }}, {{ stateName }}".</h1>
+<h1 *ngIf="!isVerified">
+  "You Either reloaded or directly jumped to this page please go back to home
+  page (/home) and press submit".
+</h1>

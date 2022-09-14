@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { StateModel } from '../interfaces/state.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +11,7 @@ export class RemoteClientService {
   constructor(private http: HttpClient) {}
 
   getStatesList() {
-    return this.http.get(this.url + '/states');
+    return this.http.get<StateModel[]>(this.url + '/states');
   }
 
   getCitiesList(stateId: number) {

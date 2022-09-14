@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { RemoteClientService } from 'src/source/remote-client.service';
+import { RemoteClientService } from 'src/app/source/remote-client.service';
 
 @Component({
   selector: 'app-list',

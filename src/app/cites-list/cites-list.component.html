@@ -3,9 +3,10 @@
   <a
     style="cursor: pointer; margin-left: 10px"
     class="list-group-item clearfix"
+    (click)="onSelectCity(i)"
   >
     <div>
-      <h4 class="list-group-item-text" (click)="onSelectCity(i)">
+      <h4 class="list-group-item-text">
         {{ city.cityName }}
       </h4>
     </div>

@@ -28,6 +28,6 @@ export class CitesListComponent implements OnInit, OnDestroy {
   }
 
   onSelectCity(index: number) {
-    this.onSelectCity(index);
+    this.service.onSelectCity(index);
   }
 }

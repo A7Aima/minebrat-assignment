@@ -20,7 +20,10 @@ export class AssignmentService {
   cityListSub?: Subscription;
   stateListSub?: Subscription;
 
+  isNotSubmittable = new Subject<boolean>();
+
   getStates() {
+    this.isNotSubmittable.next(true);
     this.stateListSub = this.client.getStatesList().subscribe((res) => {
       this.stateList = res;
       this.stateListChange.next(this.stateList.slice());
@@ -28,7 +31,6 @@ export class AssignmentService {
   }
 
   getCities(stateIdTemp: string) {
-    // this.selectedStateModel.subscribe((value) => {
     this.cityListSub = this.client
       .getCitiesList(stateIdTemp)
       .subscribe((res) => {
@@ -36,19 +38,14 @@ export class AssignmentService {
         this.cityList = res;
         this.cityListChange.next(this.cityList.slice());
       });
-    // this.cityListSub.unsubscribe();
-    // });
   }
 
   onSelectState(index: number) {
-    // this.selectedStateModel = undefined;
-    // console.log('pressed');
     this.selectedStateModel.next(this.stateList[index]);
   }
 
   onSelectCity(index: number) {
-    // this.selectedCityModel = undefined;
-    // console.log('pressed');
     this.selectedCityModel.next(this.cityList[index]);
+    this.isNotSubmittable.next(false);
   }
 }

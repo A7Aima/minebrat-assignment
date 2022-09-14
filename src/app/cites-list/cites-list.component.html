@@ -1,5 +1,13 @@
-<div class="row">
-  <div class="col-xs-12">
-    <p>city</p>
-  </div>
+<h2>Cities List</h2>
+<div *ngFor="let city of cityList; let i = index">
+  <a
+    style="cursor: pointer; margin-left: 10px"
+    class="list-group-item clearfix"
+  >
+    <div>
+      <h4 class="list-group-item-text" (click)="onSelectCity(i)">
+        {{ city.cityName }}
+      </h4>
+    </div>
+  </a>
 </div>

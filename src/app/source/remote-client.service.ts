@@ -16,6 +16,6 @@ export class RemoteClientService {
   }
 
   getCitiesList(stateId: string) {
-    return this.http.get<CityModel>(this.url + '/states/cities/' + stateId);
+    return this.http.get<CityModel[]>(this.url + '/states/cities/' + stateId);
   }
 }

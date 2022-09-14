@@ -1,26 +1,20 @@
-<button class="btn btn-primary" (click)="onSubmit()" [disabled]="isNotSubmit">
-  Submit
-</button>
-<div class="row">
-  <div class="col-md-5">
-    <h2>States List</h2>
-    <div *ngFor="let state of stateList; let i = index">
-      <a
-        style="cursor: pointer; margin-left: 10px"
-        class="list-group-item clearfix"
-        (click)="onSelectState(i)"
-      >
-        <div>
-          <h4 class="list-group-item-text">
-            {{ state.stateName }}
-          </h4>
-        </div>
-      </a>
+<form [formGroup]="stateCityForm" (ngSubmit)="onSubmit()">
+  <button class="btn btn-primary" [disabled]="stateCityForm.valid">
+    Submit
+  </button>
+  <div class="row">
+    <div class="col-md-5">
+      <h2>States List</h2>
+      <select name="states" id="states" formControlName="state">
+        <option *ngFor="let state of stateList; let i = index" [value]="state">
+          {{ state.stateName }}
+        </option>
+      </select>
+    </div>
+    <div class="col-md-7">
+      <div>
+        <app-cites-list [parentForm]="stateCityForm"></app-cites-list>
+      </div>
     </div>
   </div>
-  <div class="col-md-7">
-    <div>
-      <app-cites-list></app-cites-list>
-    </div>
-  </div>
-</div>
+</form>

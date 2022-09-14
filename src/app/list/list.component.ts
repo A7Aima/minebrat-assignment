@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import { RemoteClientService } from 'src/app/source/remote-client.service';
 import { StateModel } from 'src/app/interfaces/state.interface';
 import { AssignmentService } from '../services/assignment.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-list',
@@ -18,6 +19,11 @@ export class ListComponent implements OnInit, OnDestroy {
   stateListSubscribe?: Subscription;
   stateSubscribe?: Subscription;
   submitSubscribe?: Subscription;
+
+  stateCityForm = new FormGroup({
+    state: new FormControl(null, Validators.required),
+    city: new FormControl(null, Validators.required),
+  });
 
   ngOnInit(): void {
     this.service.getStates();

@@ -1,9 +1,8 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { CityModel } from '../interfaces/city.interface';
-import { StateModel } from '../interfaces/state.interface';
 import { AssignmentService } from '../services/assignment.service';
-import { RemoteClientService } from '../source/remote-client.service';
 
 @Component({
   selector: 'app-cites-list',
@@ -11,6 +10,8 @@ import { RemoteClientService } from '../source/remote-client.service';
   styleUrls: ['./cites-list.component.scss'],
 })
 export class CitesListComponent implements OnInit, OnDestroy {
+  @Input()
+  parentForm!: FormGroup;
   cityList: CityModel[] = [];
 
   constructor(private service: AssignmentService) {}

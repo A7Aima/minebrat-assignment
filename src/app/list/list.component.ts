@@ -10,6 +10,7 @@ import { StateModel } from 'src/app/interfaces/state.interface';
 })
 export class ListComponent implements OnInit, OnDestroy {
   stateList: StateModel[] = [];
+  selectedStateModel?: StateModel;
 
   constructor(private client: RemoteClientService) {}
   stateSubscribe?: Subscription;
@@ -28,5 +29,8 @@ export class ListComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.stateSubscribe?.unsubscribe();
   }
-  //             "proxyConfig": "src/proxy.conf.json"
+
+  onSelectState(index: number) {
+    this.selectedStateModel = this.stateList[index];
+  }
 }

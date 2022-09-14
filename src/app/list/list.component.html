@@ -1,1 +1,21 @@
-<p>list works!</p>
+<div class="row">
+  <div class="col-md-5">
+    <div *ngFor="let state of stateList; let i = index">
+      <a
+        style="cursor: pointer; margin-left: 10px"
+        class="list-group-item clearfix"
+      >
+        <div>
+          <!-- <div class="pull-left"> -->
+          <h4 class="list-group-item-text" (click)="onSelectState(i)">
+            {{ state.stateName }}
+          </h4>
+          <!-- </div> -->
+        </div>
+      </a>
+    </div>
+  </div>
+  <div class="col-md-7">
+    <app-cites-list></app-cites-list>
+  </div>
+</div>

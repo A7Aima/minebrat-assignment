@@ -1,5 +1,5 @@
 {
-    "api/v1/states": {
+    "/api": {
       "target": "http://api.minebrat.com",
       "secure": false
     }

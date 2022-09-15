@@ -10,9 +10,6 @@ import { StateModel } from '../interfaces/state.interface';
 export class AssignmentService {
   constructor(private http: HttpClient) {}
 
-  cityListChange = new Subject<CityModel[]>();
-  cityChange = new Subject<CityModel>();
-
   url = 'https://api.minebrat.com/api/v1';
 
   callStateList() {

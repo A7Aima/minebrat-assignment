@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { StateModel } from 'src/app/interfaces/state.interface';
 import { AssignmentService } from '../services/assignment.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -13,8 +13,9 @@ import { CityModel } from '../interfaces/city.interface';
 })
 export class ListComponent implements OnInit, OnDestroy {
   stateList: StateModel[] = [];
-  selectedStateModel?: StateModel;
-  selectedCityModel?: CityModel;
+  stateIDSub = new Subject<string>();
+  stateID!: string;
+  cityID!: string;
 
   constructor(private service: AssignmentService, private route: Router) {}
   stateListSubscribe?: Subscription;
@@ -29,9 +30,6 @@ export class ListComponent implements OnInit, OnDestroy {
       // console.log(res);
       this.stateList = res;
     });
-    this.service.cityChange.subscribe((res) => {
-      this.selectedCityModel = res;
-    });
   }
 
   ngOnDestroy(): void {
@@ -39,33 +37,22 @@ export class ListComponent implements OnInit, OnDestroy {
   }
 
   onSelectState() {
-    if ((<FormControl>this.stateCityForm.get('state')).value) {
-      // console.log(
-      //   'StateId ' + (<FormControl>this.stateCityForm.get('state')).value
-      // );
-      this.selectedStateModel = this.stateList.find(
-        (s) =>
-          s.stateId === (<FormControl>this.stateCityForm.get('state')).value
-      );
-      this.service
-        .callCitiesList((<FormControl>this.stateCityForm.get('state')).value)
-        .subscribe((res) => {
-          console.log(res);
-          this.service.cityListChange.next(res);
-        });
+    if (this.stateCityForm.get('state')?.value) {
+      this.stateID = this.stateCityForm.get('state')?.value;
+      this.stateIDSub.next(this.stateCityForm.get('state')?.value);
     }
+  }
+  onSelectCity(idCity: string) {
+    console.log('city ID ' + idCity);
+    this.cityID = idCity;
   }
 
   onSubmit() {
-    console.log(
-      'Submittable ' +
-        this.selectedStateModel?.stateName +
-        this.selectedCityModel?.cityName
-    );
+    console.log('Submittable ' + this.stateID + '  ' + this.cityID);
     this.route.navigate(['result'], {
       queryParams: {
-        stateId: this.selectedStateModel?.stateId,
-        cityId: this.selectedCityModel?.cityId,
+        stateId: this.stateID,
+        cityId: this.cityID,
       },
     });
   }

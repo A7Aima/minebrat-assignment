@@ -21,7 +21,11 @@
     </div>
     <div class="col-md-7">
       <div *ngIf="stateCityForm.get('state')?.valid ?? false">
-        <app-cites-list [parentForm]="stateCityForm"></app-cites-list>
+        <app-cites-list
+          [parentForm]="stateCityForm"
+          [stateId]="stateIDSub.asObservable()"
+          (cityId)="onSelectCity($event)"
+        ></app-cites-list>
       </div>
     </div>
   </div>

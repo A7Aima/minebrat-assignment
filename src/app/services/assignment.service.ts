@@ -1,14 +1,14 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import { CityModel } from '../interfaces/city.interface';
 import { StateModel } from '../interfaces/state.interface';
-import { RemoteClientService } from '../source/remote-client.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AssignmentService {
-  constructor(private client: RemoteClientService) {}
+  constructor(private http: HttpClient) {}
 
   stateList: StateModel[] = [];
   selectedStateModel!: StateModel;
@@ -21,20 +21,18 @@ export class AssignmentService {
   stateListSub?: Subscription;
 
   getStates() {
-    this.stateListSub = this.client.getStatesList().subscribe((res) => {
+    this.stateListSub = this.getStatesCall().subscribe((res) => {
       this.stateList = res;
       this.stateListChange.next(this.stateList.slice());
     });
   }
 
   getCities(stateIdTemp: string) {
-    this.cityListSub = this.client
-      .getCitiesList(stateIdTemp)
-      .subscribe((res) => {
-        console.log(res);
-        this.cityList = res;
-        this.cityListChange.next(this.cityList.slice());
-      });
+    this.cityListSub = this.getCitiesCall(stateIdTemp).subscribe((res) => {
+      console.log(res);
+      this.cityList = res;
+      this.cityListChange.next(this.cityList.slice());
+    });
   }
 
   onSelectState(index: number) {
@@ -44,5 +42,15 @@ export class AssignmentService {
 
   onSelectCity(index: number) {
     this.selectedCityModel = this.cityList[index];
+  }
+
+  url = 'https://api.minebrat.com/api/v1';
+
+  getStatesCall() {
+    return this.http.get<StateModel[]>(this.url + '/states');
+  }
+
+  getCitiesCall(stateId: string) {
+    return this.http.get<CityModel[]>(this.url + '/states/cities/' + stateId);
   }
 }

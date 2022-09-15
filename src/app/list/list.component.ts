@@ -16,11 +16,7 @@ export class ListComponent implements OnInit, OnDestroy {
   selectedStateModel?: StateModel;
   selectedCityModel?: CityModel;
 
-  constructor(
-    private service: AssignmentService,
-    private route: Router,
-    private activeRoute: ActivatedRoute
-  ) {}
+  constructor(private service: AssignmentService, private route: Router) {}
   stateListSubscribe?: Subscription;
 
   stateCityForm = new FormGroup({
@@ -66,6 +62,11 @@ export class ListComponent implements OnInit, OnDestroy {
         this.selectedStateModel?.stateName +
         this.selectedCityModel?.cityName
     );
-    // this.route.navigate(['result']);
+    this.route.navigate(['result'], {
+      queryParams: {
+        stateId: this.selectedStateModel?.stateId,
+        cityId: this.selectedCityModel?.cityId,
+      },
+    });
   }
 }

@@ -11,10 +11,7 @@
         formControlName="state"
         (click)="onSelectState()"
       >
-        <option
-          *ngFor="let state of stateList; let i = index"
-          [value]="state.stateId"
-        >
+        <option *ngFor="let state of stateList; let i = index" [value]="i">
           {{ state.stateName }}
         </option>
       </select>

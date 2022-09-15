@@ -45,9 +45,6 @@ export class ListComponent implements OnInit, OnDestroy {
       this.service.onSelectState(
         (<FormControl>this.stateCityForm.get('state')).value
       );
-      this.service.getCities(
-        (<FormControl>this.stateCityForm.get('state')).value
-      );
     }
   }
 

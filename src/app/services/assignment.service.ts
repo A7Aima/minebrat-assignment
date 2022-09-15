@@ -39,6 +39,7 @@ export class AssignmentService {
 
   onSelectState(index: number) {
     this.selectedStateModel = this.stateList[index];
+    this.getCities(this.selectedStateModel.stateId);
   }
 
   onSelectCity(index: number) {

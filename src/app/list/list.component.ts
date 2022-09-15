@@ -1,10 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { RemoteClientService } from 'src/app/source/remote-client.service';
 import { StateModel } from 'src/app/interfaces/state.interface';
 import { AssignmentService } from '../services/assignment.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CityModel } from '../interfaces/city.interface';
 
 @Component({
   selector: 'app-list',
@@ -14,6 +14,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class ListComponent implements OnInit, OnDestroy {
   stateList: StateModel[] = [];
   selectedStateModel?: StateModel;
+  selectedCityModel?: CityModel;
 
   constructor(
     private service: AssignmentService,
@@ -28,11 +29,15 @@ export class ListComponent implements OnInit, OnDestroy {
   });
 
   ngOnInit(): void {
-    this.service.getStates();
-    this.stateListSubscribe = this.service.stateListChange.subscribe((res) => {
+    this.service.callStateList().subscribe((res) => {
+      console.log(res);
       this.stateList = res;
     });
+    this.service.cityChange.subscribe((res) => {
+      this.selectedCityModel = res;
+    });
   }
+
   ngOnDestroy(): void {
     this.stateListSubscribe?.unsubscribe();
   }
@@ -40,16 +45,27 @@ export class ListComponent implements OnInit, OnDestroy {
   onSelectState() {
     if ((<FormControl>this.stateCityForm.get('state')).value) {
       console.log(
-        'StateId' + (<FormControl>this.stateCityForm.get('state')).value
+        'StateId ' + (<FormControl>this.stateCityForm.get('state')).value
       );
-      this.service.onSelectState(
-        (<FormControl>this.stateCityForm.get('state')).value
+      this.selectedStateModel = this.stateList.find(
+        (s) =>
+          s.stateId === (<FormControl>this.stateCityForm.get('state')).value
       );
+      this.service
+        .callCitiesList((<FormControl>this.stateCityForm.get('state')).value)
+        .subscribe((res) => {
+          console.log(res);
+          this.service.cityListChange.next(res);
+        });
     }
   }
 
   onSubmit() {
-    console.log('Submittable');
-    this.route.navigate(['result']);
+    console.log(
+      'Submittable ' +
+        this.selectedStateModel?.stateName +
+        this.selectedCityModel?.cityName
+    );
+    // this.route.navigate(['result']);
   }
 }

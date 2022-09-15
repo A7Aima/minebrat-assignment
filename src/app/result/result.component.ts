@@ -14,10 +14,10 @@ export class ResultComponent implements OnInit {
 
   ngOnInit(): void {
     // console.log('result page' + this.service.selectedStateModel);s
-    if (this.service.selectedStateModel && this.service.selectedCityModel) {
-      this.stateName = this.service.selectedStateModel.stateName;
-      this.cityName = this.service.selectedCityModel.cityName;
-      this.isVerified = true;
-    }
+    // if (this.service.selectedStateModel && this.service.selectedCityModel) {
+    //   this.stateName = this.service.selectedStateModel.stateName;
+    //   this.cityName = this.service.selectedCityModel.cityName;
+    //   this.isVerified = true;
+    // }
   }
 }

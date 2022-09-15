@@ -3,7 +3,7 @@ import { Subscription } from 'rxjs';
 import { StateModel } from 'src/app/interfaces/state.interface';
 import { AssignmentService } from '../services/assignment.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { CityModel } from '../interfaces/city.interface';
 
 @Component({

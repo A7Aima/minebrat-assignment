@@ -30,7 +30,7 @@ export class ListComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.service.callStateList().subscribe((res) => {
-      console.log(res);
+      // console.log(res);
       this.stateList = res;
     });
     this.service.cityChange.subscribe((res) => {
